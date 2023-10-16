@@ -23,11 +23,18 @@ if __name__ == "__main__":
     action="store_true",
     help="Outputs additional information should an exception occur.")
   arg_parser.add_argument(
+    "-t", "--threadsmax",
+    type=int,
+    default=1,
+    help="The maximum number of concurrent requests to allow.")
+  arg_parser.add_argument(
     "--xformers",
     action="store_true",
     help="Enables support for xformers to optimize diffusion.")
   args = arg_parser.parse_args()
-  pipeline_options = PipelineOptions(args.xformers)
+  pipeline_options = PipelineOptions(
+    max_concurrency=args.threadsmax,
+    is_xformers_enabled=args.xformers)
 
   if (pipeline_options.IsXformersEnabled):
     print("PICO: xformers support enabled.")

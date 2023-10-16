@@ -70,12 +70,13 @@ python Main.py
 
 ### Runtime Arguments
 
-| Name          | Description                                              | Default | Required |
-| ------------- | -------------------------------------------------------- | ------- | -------- |
-| --host        | The address to listen on                                 | 0.0.0.0 | No       |
-| --port, -p    | The port to listen on                                    | 5088    | No       |
-| --verbose, -v | Outputs additional information should an exception occur | N/A     | No       |
-| --xformers    | Enables support for xformers to optimize diffusion       | N/A     | No       |
+| Name             | Description                                              | Default | Required |
+| ---------------- | -------------------------------------------------------- | ------- | -------- |
+| --host           | The address to listen on                                 | 0.0.0.0 | No       |
+| --port, -p       | The port to listen on                                    | 5088    | No       |
+| --verbose, -v    | Outputs additional information should an exception occur | N/A     | No       |
+| --threadsmax, -t | The maximum number of concurrent requests to allow       | 1       | No       |
+| --xformers       | Enables support for xformers to optimize diffusion       | N/A     | No       |
 
 ### Environment Variables
 

@@ -21,7 +21,7 @@ class PicoAPI:
     self._Api = FastAPI()
     self._Api.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["POST"], allow_headers=["*"])
     self._ApiRouter = APIRouter()
-    self._GpuGate = ConcurrencyGate(1)
+    self._GpuGate = ConcurrencyGate(pipeline_options.MaxConcurrency)
     self._PipelineOptions = pipeline_options
     self._Host = host
     self._Port = port
@@ -73,19 +73,19 @@ class PicoAPI:
     }
   
   def _InvokeStableDiffusion(self, request: StableDiffusionRequest):
-    return self._InvokePipeline(lambda: StableDiffusion.Generate(request, self._PipelineOptions))
+    return self._InvokePipeline(lambda: StableDiffusion.Generate(request, self._PipelineOptions), self._GpuGate)
   
   def _InvokeStableDiffusion2(self, request: StableDiffusion2Request):
-    return self._InvokePipeline(lambda: StableDiffusion.Generate2(request, self._PipelineOptions))
+    return self._InvokePipeline(lambda: StableDiffusion.Generate2(request, self._PipelineOptions), self._GpuGate)
   
   def _InvokeStableDiffusionXl(self, request: StableDiffusionXlRequest):
-    return self._InvokePipeline(lambda: StableDiffusion.GenerateXl(request, self._PipelineOptions))
+    return self._InvokePipeline(lambda: StableDiffusion.GenerateXl(request, self._PipelineOptions), self._GpuGate)
   
   def _InvokeStableDiffusionImageToImage(self, request: StableDiffusionImageToImageRequest):
-    return self._InvokePipeline(lambda: StableDiffusion.ImageToImage(request, self._PipelineOptions))
+    return self._InvokePipeline(lambda: StableDiffusion.ImageToImage(request, self._PipelineOptions), self._GpuGate)
   
   def _InvokeStableDiffusionImageVariation(self, request: StableDiffusionImageVariationRequest):
-    return self._InvokePipeline(lambda: StableDiffusion.ImageVariation(request, self._PipelineOptions))
+    return self._InvokePipeline(lambda: StableDiffusion.ImageVariation(request, self._PipelineOptions), self._GpuGate)
   
   def _InvokeStableDiffusionInpaint(self, request: StableDiffusionInpaintRequest):
-    return self._InvokePipeline(lambda: StableDiffusion.Inpaint(request, self._PipelineOptions))
+    return self._InvokePipeline(lambda: StableDiffusion.Inpaint(request, self._PipelineOptions), self._GpuGate)
