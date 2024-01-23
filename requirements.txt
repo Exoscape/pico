@@ -1,4 +1,4 @@
-diffusers[torch]==0.21.0
+diffusers[torch]==0.25.1
 fastapi==0.95.0
 --extra-index-url https://download.pytorch.org/whl/cu116
 torch==1.13.1+cu116
